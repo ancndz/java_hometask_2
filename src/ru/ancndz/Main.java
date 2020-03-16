@@ -1,4 +1,4 @@
-package ru.ancndz.task1;
+package ru.ancndz;
 
 import ru.ancndz.task1.mov.Movie;
 import ru.ancndz.task1.staff.WorkGroups;
