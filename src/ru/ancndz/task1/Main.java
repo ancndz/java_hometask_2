@@ -4,6 +4,14 @@ import ru.ancndz.task1.mov.Movie;
 import ru.ancndz.task1.mov.Movie.Scenario;
 import ru.ancndz.task1.staff.WorkGroups;
 import ru.ancndz.task1.staff.Worker;
+import ru.ancndz.task2.zoo.Zoo;
+import ru.ancndz.task2.zoo.living.Animal;
+import ru.ancndz.task2.zoo.living.Staff;
+import ru.ancndz.task2.zoo.stuff.Journal;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
@@ -130,6 +138,38 @@ public class Main {
         resDogs.printMovie();
 
         resDogs.getScenario().getCharacters()[3].printCharacter();
+
+        System.out.println("\n////////////////////////////////////////////////////////////");
+        System.out.println("\n///////////////////// Задание 2 /////////////////////////////");
+        System.out.println("\n////////////////////////////////////////////////////////////");
+
+        ArrayList<Animal> zooAnimals = new ArrayList<>();
+        ArrayList<Journal> zooJournals = new ArrayList<>();
+
+        zooAnimals.add(new Animal("bird", "jonathan livingston", "2 years"));
+        zooJournals.add(new Journal(zooAnimals.get(0)));
+        zooAnimals.add(new Animal("fish", "Clown Eddie", "1.2 years"));
+        zooJournals.add(new Journal(zooAnimals.get(1)));
+        zooAnimals.add(new Animal("bear", "Snowball", "5 years"));
+        zooJournals.add(new Journal(zooAnimals.get(2)));
+
+        ArrayList<Staff> zooStaff = new ArrayList<>();
+
+        zooStaff.add(new Staff("Person 1", 10, "Birds"));
+        zooStaff.add(new Staff("Person 2", 10, "Birds"));
+        zooStaff.add(new Staff("Person 3", 10, "Birds"));
+        zooStaff.add(new Staff("Person 4", 10, "Birds"));
+
+        Zoo zoo = new Zoo("ZO(3)", zooAnimals, zooStaff, zooJournals);
+
+        //добавили первому работнику в список заботы нашего медведя
+        zoo.getStaff().get(0).addCareAnimal(zooAnimals.get(2));
+        zoo.getAnimals().get(2).addCareStaff(zoo.getStaff().get(0));
+        //животное заболело, сотрудник, который за ним закреплен вносит правки в журнал животного
+        zoo.getAnimals().get(2).animalSick();
+        zoo.getAnimals().get(2).getJournal().addPage("First page in sick history", zoo.getAnimals().get(2).getCareStaff().get(0));
+        //пытаемся уволить сотрудника
+        zoo.fireStaff(zoo.getStaff().get(0));
     }
 
 }
