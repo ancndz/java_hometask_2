@@ -1,7 +1,6 @@
 package ru.ancndz.task1;
 
 import ru.ancndz.task1.mov.Movie;
-import ru.ancndz.task1.mov.Movie.Scenario;
 import ru.ancndz.task1.staff.WorkGroups;
 import ru.ancndz.task1.staff.Worker;
 import ru.ancndz.task2.zoo.Zoo;
@@ -10,134 +9,102 @@ import ru.ancndz.task2.zoo.living.Staff;
 import ru.ancndz.task2.zoo.stuff.Journal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
 
     public static void main(String[] args){
 
-        //предисловие: очень много static методов
+        Movie terminator = new Movie("The Terminator", 1984);
 
-        //массив героев фильма
-        Scenario.Character[] terminatorCharacters = new Scenario.Character[3];
+        terminator.setScenario("James Cameron", "https://en.wikipedia.org/wiki/The_Terminator", "107I");
 
-        terminatorCharacters[0] = new Scenario.Character("The Terminator", "Male", "main anti-hero");
-        terminatorCharacters[1] = new Scenario.Character("Sarah Connor", "Female", "main hero");
-        terminatorCharacters[2] = new Scenario.Character("Kyle Reese", "Male", "main hero");
+        terminator.getScenario().addCharacter("The Terminator", "Male", "main anti-hero");
+        terminator.getScenario().addCharacter("Sarah Connor", "Female", "main hero");
+        terminator.getScenario().addCharacter("Kyle Reese", "Male", "main hero");
 
-        //создаем объект "сценарий" с массивом героев и подробностями
-        Scenario terminatorScenario = new Scenario("James Cameron", "https://en.wikipedia.org/wiki/The_Terminator", "107I", terminatorCharacters);
-
-        //массив локаций
-        Movie.Location[] terminatorLocations = new Movie.Location[2];
-
-        terminatorLocations[0] = new Movie.Location("Future", "World");
-        terminatorLocations[1] = new Movie.Location("Los Angeles", "USA");
+        terminator.addLocations("Future", "World");
+        terminator.addLocations("Los Angeles", "USA");
 
         //массив работников
         Worker[] terminatorEditors = new Worker[2];
         terminatorEditors[0] = new Worker("First Worker", "i don't know at all");
         terminatorEditors[1] = new Worker("Second Worker", "i don't know at all");
 
-        //создаем объект группы работников с массивом и названием
-        WorkGroups.VisioTeam terminatorVisioTeam = new WorkGroups.VisioTeam("HFC Visio Group", terminatorEditors);
-        //создаем объект главных работников (в моем случае режиссеры и продюссеры)
-        WorkGroups.HeadTeam terminatorHeadTeam = new WorkGroups.HeadTeam(new String[] {"James Cameron"}, new String[] {"Gale Anne Hurd"});
+        WorkGroups terminatorWorkGroup = new WorkGroups("Hemdale Film Corporation");
+        terminatorWorkGroup.setVisioTeam("HFC Visio Group", terminatorEditors);
+        terminatorWorkGroup.getHeadTeam().setDirectors(new String[] {"James Cameron"});
+        terminatorWorkGroup.getHeadTeam().setProducers(new String[] {"Gale Anne Hurd"});
 
-        //создаем объект группы производства
-        WorkGroups terminatorStaff = new WorkGroups("Hemdale Film Corporation", terminatorVisioTeam, terminatorHeadTeam);
+        terminator.setStaff(terminatorWorkGroup);
 
-        //создаем объект фильма с производственной площадкой, сценарием и локациями
-        Movie terminator = new Movie("Terminator", 1984, terminatorScenario, terminatorLocations, terminatorStaff);
-
-        //детальный вывод на экран
         terminator.printMovie();
 
         //отдельный вывод на экран - вывели сару коннор
-        terminator.getScenario().getCharacters()[1].printCharacter();
+        terminator.getScenario().getCharacters().get(1).printCharacter();
 
         System.out.println("\n////////////////////////////////////////////////////////////");
 
-        //массив героев фильма
-        Scenario.Character[] snatchCharacters = new Scenario.Character[6];
+        Movie snatch = new Movie("snatch", 2000);
 
-        snatchCharacters[0] = new Scenario.Character("Turkish", "Male", "main");
-        snatchCharacters[1] = new Scenario.Character("Mickey O'Neil", "Male", "main");
-        snatchCharacters[2] = new Scenario.Character("Tommy", "Male", "main");
-        snatchCharacters[3] = new Scenario.Character("\"Brick Top\" Pulford", "Male", "main");
-        snatchCharacters[4] = new Scenario.Character("Vinny", "Male", "main");
-        snatchCharacters[5] = new Scenario.Character("Boris \"The Blade\" Yurinov", "Male", "main");
+        snatch.setScenario("Guy Ritchie", "https://en.wikipedia.org/wiki/Snatch_(film)", "102I");
 
-        //создаем объект "сценарий" с массивом героев и подробностями
-        Scenario snatchScenario = new Scenario("Guy Ritchie", "https://en.wikipedia.org/wiki/Snatch_(film)", "102I", snatchCharacters);
+        snatch.getScenario().addCharacter("Turkish", "Male", "main");
+        snatch.getScenario().addCharacter("Mickey O'Neil", "Male", "main");
+        snatch.getScenario().addCharacter("Tommy", "Male", "main");
+        snatch.getScenario().addCharacter("\"Brick Top\" Pulford", "Male", "main");
+        snatch.getScenario().addCharacter("Vinny", "Male", "main");
+        snatch.getScenario().addCharacter("Boris \"The Blade\" Yurinov", "Male", "main");
 
-        //массив локаций
-        Movie.Location[] snatchLocations = new Movie.Location[1];
-
-        snatchLocations[0] = new Movie.Location("New York", "USA");
+        snatch.addLocations("New York", "USA");
 
         //массив работников
         Worker[] snatchEditors = new Worker[2];
-        snatchEditors[0] = new Worker("First Worker", "i don't know");
-        snatchEditors[1] = new Worker("Second Worker", "i don't know");
+        snatchEditors[0] = new Worker("First Worker", "i don't know at all");
+        snatchEditors[1] = new Worker("Second Worker", "i don't know at all");
 
-        //создаем объект группы работников с массивом и названием
-        WorkGroups.VisioTeam snatchVisioTeam = new WorkGroups.VisioTeam("Sony Visio Group", snatchEditors);
-        //создаем объект главных работников (в моем случае режиссеры и продюссеры)
-        WorkGroups.HeadTeam snatchHeadTeam = new WorkGroups.HeadTeam(new String[] {"Guy Ritchie"}, new String[] {"Matthew Vaughn"});
+        WorkGroups snatchWorkGroup = new WorkGroups("Columbia Pictures");
+        snatchWorkGroup.setVisioTeam("Sony Visio Group", snatchEditors);
+        snatchWorkGroup.getHeadTeam().setDirectors(new String[] {"Guy Ritchie"});
+        snatchWorkGroup.getHeadTeam().setProducers(new String[] {"Matthew Vaughn"});
 
-        //создаем объект группы производства
-        WorkGroups snatchStaff = new WorkGroups("Columbia Pictures", snatchVisioTeam, snatchHeadTeam);
+        snatch.setStaff(snatchWorkGroup);
 
-        //создаем объект фильма с производственной площадкой, сценарием и локациями
-        Movie snatch = new Movie("snatch", 2000, snatchScenario, snatchLocations, snatchStaff);
-
-        //детальный вывод на экран
         snatch.printMovie();
-
-        snatch.getScenario().getCharacters()[3].printCharacter();
+        
+        snatch.getScenario().getCharacters().get(1).printCharacter();
 
         System.out.println("\n////////////////////////////////////////////////////////////");
 
-        //массив героев фильма
-        Scenario.Character[] resDogsCharacters = new Scenario.Character[6];
+        Movie resDogs = new Movie("Reservoir Dogs", 1992);
 
-        resDogsCharacters[0] = new Scenario.Character("Mr. White/Larry Dimmick", "Male", "main");
-        resDogsCharacters[1] = new Scenario.Character("Mr. Orange/Freddy Newandyke", "Male", "main");
-        resDogsCharacters[2] = new Scenario.Character("Mr. Blonde/Vic Vega", "Male", "main");
-        resDogsCharacters[3] = new Scenario.Character("Mr. Pink", "Male", "main");
-        resDogsCharacters[4] = new Scenario.Character("\"Nice Guy\" Eddie Cabot", "Male", "main");
-        resDogsCharacters[5] = new Scenario.Character("Mr. Blue", "Male", "main");
+        resDogs.setScenario("Quentin Tarantino", "https://en.wikipedia.org/wiki/Reservoir_Dogs", "99I");
 
-        //создаем объект "сценарий" с массивом героев и подробностями
-        Scenario resDogsScenario = new Scenario("Quentin Tarantino", "https://en.wikipedia.org/wiki/Reservoir_Dogs", "99I", resDogsCharacters);
+        resDogs.getScenario().addCharacter("Mr. White/Larry Dimmick", "Male", "main");
+        resDogs.getScenario().addCharacter("Mr. Orange/Freddy Newandyke", "Male", "main");
+        resDogs.getScenario().addCharacter("Mr. Blonde/Vic Vega", "Male", "main");
+        resDogs.getScenario().addCharacter("Mr. Pink", "Male", "main");
+        resDogs.getScenario().addCharacter("\"Nice Guy\" Eddie Cabot", "Male", "main");
+        resDogs.getScenario().addCharacter("Mr. Blue", "Male", "main");
 
-        //массив локаций
-        Movie.Location[] resDogsLocations = new Movie.Location[1];
-
-        resDogsLocations[0] = new Movie.Location("Los Angeles", "USA");
+        resDogs.addLocations("Los Angeles", "USA");
 
         //массив работников
         Worker[] resDogsEditors = new Worker[2];
-        resDogsEditors[0] = new Worker("First Worker", "i don't know");
-        resDogsEditors[1] = new Worker("Second Worker", "i don't know");
+        resDogsEditors[0] = new Worker("First Worker", "i don't know at all");
+        resDogsEditors[1] = new Worker("Second Worker", "i don't know at all");
 
-        //создаем объект группы работников с массивом и названием
-        WorkGroups.VisioTeam resDogsVisioTeam = new WorkGroups.VisioTeam("Miramax Films", resDogsEditors);
-        //создаем объект главных работников (в моем случае режиссеры и продюссеры)
-        WorkGroups.HeadTeam resDogsHeadTeam = new WorkGroups.HeadTeam(new String[] {"Quentin Tarantino"}, new String[] {"Lawrence Bender"});
+        WorkGroups resDogsWorkGroup = new WorkGroups("Miramax Films");
+        resDogsWorkGroup.setVisioTeam("Dog Eat Dog Productions", resDogsEditors);
+        resDogsWorkGroup.getHeadTeam().setDirectors(new String[] {"James Cameron"});
+        resDogsWorkGroup.getHeadTeam().setProducers(new String[] {"Gale Anne Hurd"});
 
-        //создаем объект группы производства
-        WorkGroups resDogsStaff = new WorkGroups("Dog Eat Dog Productions", resDogsVisioTeam, resDogsHeadTeam);
+        resDogs.setStaff(resDogsWorkGroup);
 
-        //создаем объект фильма с производственной площадкой, сценарием и локациями
-        Movie resDogs = new Movie("Reservoir Dogs", 1992, resDogsScenario, resDogsLocations, resDogsStaff);
-
-        //детальный вывод на экран
         resDogs.printMovie();
 
-        resDogs.getScenario().getCharacters()[3].printCharacter();
+        resDogs.getScenario().getCharacters().get(1).printCharacter();
+
+        System.out.println("\n////////////////////////////////////////////////////////////");
 
         System.out.println("\n////////////////////////////////////////////////////////////");
         System.out.println("\n///////////////////// Задание 2 /////////////////////////////");
@@ -160,7 +127,7 @@ public class Main {
         zooStaff.add(new Staff("Person 3", 10, "Birds"));
         zooStaff.add(new Staff("Person 4", 10, "Birds"));
 
-        Zoo zoo = new Zoo("ZO(3)", zooAnimals, zooStaff, zooJournals);
+        Zoo zoo = new Zoo("Z-O(3)", zooAnimals, zooStaff, zooJournals);
 
         //добавили первому работнику в список заботы нашего медведя
         zoo.getStaff().get(0).addCareAnimal(zooAnimals.get(2));

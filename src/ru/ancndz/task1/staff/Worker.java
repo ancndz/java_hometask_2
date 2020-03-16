@@ -11,7 +11,7 @@ public class Worker {
                 this.name, this.position);
     }
 
-    //сеттер на его должность (может же поменяться по ходу фильма по решению начальства?)
+
     public void changePosition(String position) {
         this.position = position;
     }

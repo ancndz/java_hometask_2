@@ -2,12 +2,14 @@ package ru.ancndz.task1.mov;
 
 import ru.ancndz.task1.staff.WorkGroups;
 
+import java.util.ArrayList;
+
 public class Movie {
 
-    private String title = "The Big Lebowski";
-    private int year = 1998;
+    private String title;
+    private int year;
     private Scenario scenario;
-    private Location[] locations;
+    private ArrayList<Location> locations = new ArrayList<>();
     private WorkGroups staff;
 
     public void printMovie() {
@@ -25,16 +27,25 @@ public class Movie {
         this.scenario.printScenario();
     }
 
+    public void setScenario(String author, String textUrl, String runtime) {
+        this.scenario = new Scenario(author, textUrl, runtime);
+    }
+
+    public void addLocations(String name, String country) {
+        this.locations.add(new Location(name, country));
+    }
+
+    public void setStaff(WorkGroups staff) {
+        this.staff = staff;
+    }
+
     public WorkGroups getStaff() {
         return staff;
     }
 
-    public Movie(String title, int year, Scenario scenario, Location[] locations, WorkGroups staff) {
+    public Movie(String title, int year) {
         this.title = title;
         this.year = year;
-        this.scenario = scenario;
-        this.locations = locations;
-        this.staff = staff;
     }
 
     public String getTitle() {
@@ -49,22 +60,25 @@ public class Movie {
         return scenario;
     }
 
-    public Location[] getLocations() {
+    public ArrayList<Location> getLocations() {
         return locations;
     }
 
-    public static class Scenario {
+    public class Scenario {
 
         private String author;
-        private String textUrl = "www.somescenariotext.com";
-        private String runtime = "1H 56I 59S";
-        private Character[] characters;
+        private String textUrl;
+        private String runtime;
+        private ArrayList<Character> characters = new ArrayList<>();
 
-        public Scenario(String author, String textUrl, String runtime, Character[] characters) {
+        public Scenario(String author, String textUrl, String runtime) {
             this.author = author;
             this.textUrl = textUrl;
             this.runtime = runtime;
-            this.characters = characters;
+        }
+
+        public void addCharacter(String name, String gender, String priority) {
+            this.characters.add(new Character(name, gender, priority));
         }
 
         public void printScenario() {
@@ -88,13 +102,13 @@ public class Movie {
             return runtime;
         }
 
-        public Character[] getCharacters() {
+        public ArrayList<Character> getCharacters() {
             return characters;
         }
 
-        public static class Character {
-            private String name = "the dude";
-            private String gender = "male";
+        public class Character {
+            private String name;
+            private String gender;
             private String priority = "extras";
 
             public Character(String name, String gender) {
@@ -127,9 +141,9 @@ public class Movie {
 
     }
 
-    public static class Location {
-        private String name = "";
-        private String country = "";
+    public class Location {
+        private String name;
+        private String country;
 
         public Location(String name, String country) {
             this.name = name;

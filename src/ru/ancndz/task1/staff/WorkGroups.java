@@ -4,14 +4,16 @@ public class WorkGroups {
 
     private String teamTitle;
     private VisioTeam visioTeam;
-    private HeadTeam headTeam;
+    private HeadTeam headTeam = new HeadTeam();
 
-    public WorkGroups(String teamTitle,
-                      VisioTeam visioTeam, HeadTeam headTeam) {
+    public WorkGroups(String teamTitle) {
         this.teamTitle = teamTitle;
-        this.visioTeam = visioTeam;
-        this.headTeam = headTeam;
     }
+
+    public void setVisioTeam(String teamTitle, Worker[] workers) {
+        this.visioTeam = new VisioTeam(teamTitle, workers);
+    }
+
 
     public void printWorkers() {
         System.out.printf("**%s**", this.teamTitle);
@@ -31,8 +33,8 @@ public class WorkGroups {
         return headTeam;
     }
 
-    public static class VisioTeam {
-        private String visioTeamTitle = "Some Visio Band and Co.";
+    public class VisioTeam {
+        private String visioTeamTitle;
         private Worker[] editors;
 
         public VisioTeam(String teamTitle, Worker[] editors) {
@@ -60,12 +62,17 @@ public class WorkGroups {
         }
     }
 
-    public static class HeadTeam {
+    public class HeadTeam {
         private String[] directors;
         private String[] producers;
 
-        public HeadTeam(String[] directors, String[] producers) {
+        public HeadTeam() {}
+
+        public void setDirectors(String[] directors) {
             this.directors = directors;
+        }
+
+        public void setProducers(String[] producers) {
             this.producers = producers;
         }
 
